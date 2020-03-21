@@ -60,8 +60,17 @@ public class MainActivity extends AppCompatActivity {
                     vrijeme = findViewById(R.id.vrijeme);
                     br_osoba = findViewById(R.id.br_osoba);
                     na_ime = findViewById(R.id.na_ime);
-                    int br = (int)(Math.random()*9999)+1000;
-                    pin.setText(String.valueOf(br));
+                    int br;
+                    boolean stanje = false;
+                    while(stanje==false){
+                        br = (int)(Math.random()*9999)+1000;
+                        if (!sharedPref.contains(String.valueOf(br))){
+                            pin.setText(String.valueOf(br));
+                            stanje = true;
+                        }
+                    }
+
+
                     Rezervacija rez = new Rezervacija();
 
                     String returnValue = data.getStringExtra("restoran");

@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -23,7 +23,11 @@ public class UnosRezervacije extends AppCompatActivity implements DatePickerDial
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_unos_rezervacije);
-
+        rest = findViewById(R.id.add_restoran);
+        datum = findViewById(R.id.add_datum);
+        vrijeme = findViewById(R.id.add_vrijeme);
+        br_osoba = findViewById(R.id.add_brOsoba);
+        na_ime = findViewById(R.id.add_naIme);
     }
 
     @Override
@@ -37,7 +41,7 @@ public class UnosRezervacije extends AppCompatActivity implements DatePickerDial
         String strDate = format.format(c.getTime());
 
        // String currentDateString = DateFormat.getDateInstance().format(c.getTime());
-        datum = findViewById(R.id.add_datum);
+       // datum = findViewById(R.id.add_datum);
         datum.setText(strDate);
 
     }
@@ -46,7 +50,7 @@ public class UnosRezervacije extends AppCompatActivity implements DatePickerDial
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
         String currentDateString = hourOfDay+":"+minute;
-        vrijeme = findViewById(R.id.add_vrijeme);
+       // vrijeme = findViewById(R.id.add_vrijeme);
         vrijeme.setText(currentDateString);
 
     }
@@ -62,17 +66,18 @@ public class UnosRezervacije extends AppCompatActivity implements DatePickerDial
     }
 
     public void potvrda(View v){
-        rest = findViewById(R.id.add_restoran);
-        datum = findViewById(R.id.add_datum);
-        vrijeme = findViewById(R.id.add_vrijeme);
-        br_osoba = findViewById(R.id.add_brOsoba);
-        na_ime = findViewById(R.id.add_naIme);
+        if (rest.getText().length() == 0 || datum.getText().length() == 0 || vrijeme.getText().length() == 0 || br_osoba.getText().length() == 0 || na_ime.getText().length() == 0){
+            Toast.makeText(UnosRezervacije.this, "Podaci se moraju unijeti!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Intent resultIntent = new Intent();
         resultIntent.putExtra("restoran", rest.getText().toString());
         resultIntent.putExtra("datum", datum.getText().toString());
         resultIntent.putExtra("vrijeme", vrijeme.getText().toString());
         resultIntent.putExtra("br_osoba", br_osoba.getText().toString());
         resultIntent.putExtra("na_ime", na_ime.getText().toString());
+
         setResult(RESULT_OK, resultIntent);
         finish();
     }
