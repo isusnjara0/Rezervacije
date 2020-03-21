@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         switch(requestCode) {
             case (1) : {
                 if (resultCode == Activity.RESULT_OK) {
-                    // TODO Extract the data returned from the child Activity.
+
                     SharedPreferences sp = this.getPreferences(Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
                     gson = new Gson();
