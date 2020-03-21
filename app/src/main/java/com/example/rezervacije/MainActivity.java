@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     vrijeme = findViewById(R.id.vrijeme);
                     br_osoba = findViewById(R.id.br_osoba);
                     na_ime = findViewById(R.id.na_ime);
-                    int br = (int)(Math.random()*9000)+1000;
+                    int br = (int)(Math.random()*9999)+1000;
                     pin.setText(String.valueOf(br));
                     Rezervacija rez = new Rezervacija();
 
