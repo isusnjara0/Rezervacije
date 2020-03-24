@@ -51,18 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
                     SharedPreferences sp = this.getPreferences(Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
-                    gson = new Gson();
-
-
-                    pin = findViewById(R.id.pin);
-                    restoran = findViewById(R.id.restoran);
-                    datum = findViewById(R.id.datum);
-                    vrijeme = findViewById(R.id.vrijeme);
-                    br_osoba = findViewById(R.id.br_osoba);
-                    na_ime = findViewById(R.id.na_ime);
                     int br;
                     boolean stanje = false;
-                    while(stanje==false){
+                    while(!stanje){
                         br = (int)(Math.random()*9999)+1000;
                         if (!sharedPref.contains(String.valueOf(br))){
                             pin.setText(String.valueOf(br));
@@ -104,13 +95,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void izbrisi(View v){
-        pin = findViewById(R.id.pin);
-        restoran = findViewById(R.id.restoran);
-        datum = findViewById(R.id.datum);
-        vrijeme = findViewById(R.id.vrijeme);
-        br_osoba = findViewById(R.id.br_osoba);
-        na_ime = findViewById(R.id.na_ime);
-
         SharedPreferences.Editor editor = sharedPref.edit();
         if (!sharedPref.contains(pin.getText().toString())){
             Toast.makeText(MainActivity.this, "Podatak s ključem "+pin.getText().toString()+" ne postoji!", Toast.LENGTH_SHORT).show();
@@ -136,13 +120,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void izmjena(View v){
-        pin = findViewById(R.id.pin);
-        restoran = findViewById(R.id.restoran);
-        datum = findViewById(R.id.datum);
-        vrijeme = findViewById(R.id.vrijeme);
-        br_osoba = findViewById(R.id.br_osoba);
-        na_ime = findViewById(R.id.na_ime);
-        String pn = pin.getText().toString();
+         String pn = pin.getText().toString();
 
         if (!sharedPref.contains(pin.getText().toString())){
             Toast.makeText(MainActivity.this, "Podatak s pinom "+pn+" ne postoji!", Toast.LENGTH_SHORT).show();
@@ -169,15 +147,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void citanje(View v){
-
-
-        pin = findViewById(R.id.pin);
-        restoran = findViewById(R.id.restoran);
-        datum = findViewById(R.id.datum);
-        vrijeme = findViewById(R.id.vrijeme);
-        br_osoba = findViewById(R.id.br_osoba);
-        na_ime = findViewById(R.id.na_ime);
-
         Rezervacija rez = gson.fromJson(sharedPref.getString(pin.getText().toString(),""), Rezervacija.class);
         if (rez == null){
             Toast.makeText(MainActivity.this, "Rezervacija ne postoji u spremištu!", Toast.LENGTH_SHORT).show();
